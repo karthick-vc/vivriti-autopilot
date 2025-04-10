@@ -2,16 +2,21 @@
     if (window.VivritiWidgetLoaded) return;
     window.VivritiWidgetLoaded = true;
 
-    // === Inject Font Awesome ===
-    const faLink = document.createElement('link');
-    faLink.rel = 'stylesheet';
-    faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
-    document.head.appendChild(faLink);
+    // === Create shadow host ===
+    const shadowHost = document.createElement('div');
+    shadowHost.id = 'vivriti-widget-root';
+    shadowHost.style.position = 'fixed';
+    shadowHost.style.bottom = '30px';
+    shadowHost.style.right = '30px';
+    shadowHost.style.zIndex = '99999';
+    document.body.appendChild(shadowHost);
 
-    // === Inject custom widget CSS ===
+    const shadow = shadowHost.attachShadow({ mode: 'open' });
+
+    // === Append Font Awesome & custom styles to shadow DOM ===
     const style = document.createElement('style');
-    style.innerHTML = `
-  #bottom-search-overlay {
+    style.textContent = `
+      #bottom-search-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -123,74 +128,62 @@ div#loader {
 input#search-input:focus-visible {
     outline: none;
 }
-  `;
-    document.head.appendChild(style);
+    `;
 
-    // === Load assets ===
-    const logoImgUrl = 'https://www.vivriticapital.com/assets/image/logo/fav-icon.png';
-    const logoWhiteUrl = 'https://www.vivriticapital.com/assets/image/logo/vivirti_logo_img.svg';
+    const fontAwesome = document.createElement('link');
+    fontAwesome.rel = 'stylesheet';
+    fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
 
-    // === Create chat button ===
-    const logo = document.createElement('div');
-    logo.id = 'bottom-search-logo';
-    logo.innerHTML = `<img src="${logoImgUrl}" width="40" height="40" />`;
-    Object.assign(logo.style, {
-        position: 'fixed',
-        bottom: '30px',
-        right: '30px',
-        zIndex: 10000,
-        cursor: 'pointer'
-    });
-    document.body.appendChild(logo);
-
-    // === Create overlay ===
-    const overlay = document.createElement('div');
-    overlay.id = 'bottom-search-overlay';
-    overlay.style.display = 'none';
-    overlay.innerHTML = `
-      <div id="background-overlay"></div>
-      <div id="chat-container">
-        <div class="exs-header-top">
-          <img src="${logoWhiteUrl}" />
-        </div>
-        <div id="response" class="chat-response"></div>
-        <div id="loader" style="display: none;">Searching...</div>
-        <div id="search-box" class="chat-input-bar">
-          <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
-            <input type="text" id="search-input" placeholder="Type or speak your query..." />
-            <button id="mic-button" title="Speak your query">&#xf130;</button>
+    // === Build widget HTML inside shadow DOM ===
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `
+      <div id="bottom-search-logo">
+        <img src="https://yourdomain.com/assets/vivriti-next.svg" width="40" height="40" />
+      </div>
+      <div id="bottom-search-overlay" style="display: none;">
+        <div id="background-overlay"></div>
+        <div id="chat-container">
+          <div class="exs-header-top">
+            <img src="https://yourdomain.com/assets/Vivriti-Next-logo-White.svg" />
+          </div>
+          <div id="response" class="chat-response"></div>
+          <div id="loader" style="display: none;">Searching...</div>
+          <div id="search-box" class="chat-input-bar">
+            <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+              <input type="text" id="search-input" placeholder="Type or speak your query..." />
+              <button id="mic-button" title="Speak your query">&#xf130;</button>
+            </div>
           </div>
         </div>
       </div>
     `;
-    document.body.appendChild(overlay);
 
-    // === Toggle overlay on click ===
+    shadow.appendChild(fontAwesome);
+    shadow.appendChild(style);
+    shadow.appendChild(wrapper);
+
+    // === Functionality ===
+    const logo = shadow.querySelector('#bottom-search-logo');
+    const overlay = shadow.querySelector('#bottom-search-overlay');
+    const input = shadow.querySelector('#search-input');
+    const response = shadow.querySelector('#response');
+    const loader = shadow.querySelector('#loader');
+    const micButton = shadow.querySelector('#mic-button');
+
     logo.onclick = () => {
-        const isVisible = overlay.style.display === 'flex';
-        overlay.style.display = isVisible ? 'none' : 'flex';
-        if (!isVisible) document.getElementById('search-input').focus();
+        overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+        input.focus();
     };
-
-    // === Chat functionality ===
-    const input = overlay.querySelector('#search-input');
-    const loader = overlay.querySelector('#loader');
-    const response = overlay.querySelector('#response');
 
     function handleSearch(query) {
         if (!query) return;
         loader.style.display = 'block';
         response.innerHTML = '';
-
         setTimeout(() => {
             loader.style.display = 'none';
             typeText(response, `You searched for "${query}". This is a sample response.`);
-        }, 1200);
+        }, 1000);
     }
-
-    input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleSearch(input.value.trim());
-    });
 
     function typeText(el, text, i = 0) {
         if (i < text.length) {
@@ -199,21 +192,20 @@ input#search-input:focus-visible {
         }
     }
 
-    // === Voice Recognition ===
-    const micButton = overlay.querySelector('#mic-button');
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleSearch(input.value.trim());
+    });
 
+    // === Speech Recognition ===
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
         const recognition = new SpeechRecognition();
         recognition.lang = 'en-US';
         let isRecognizing = false;
 
         micButton.onclick = () => {
-            if (isRecognizing) {
-                recognition.stop();
-            } else {
-                recognition.start();
-            }
+            if (isRecognizing) recognition.stop();
+            else recognition.start();
         };
 
         recognition.onstart = () => {
@@ -233,6 +225,6 @@ input#search-input:focus-visible {
         };
     } else {
         micButton.disabled = true;
-        micButton.title = "Speech recognition not supported in this browser.";
+        micButton.title = "Speech recognition not supported.";
     }
 })();
