@@ -6,7 +6,7 @@
     const shadowHost = document.createElement('div');
     shadowHost.id = 'vivriti-widget-root';
     shadowHost.style.position = 'fixed';
-    shadowHost.style.bottom = '30px';
+    shadowHost.style.bottom = '80px';
     shadowHost.style.right = '30px';
     shadowHost.style.zIndex = '99999';
     document.body.appendChild(shadowHost);
@@ -31,7 +31,7 @@
 
 #chat-container {
     position: fixed;
-    bottom: 80px;
+    bottom: 30px;
     right: 80px;
     width: 420px;
     height: 70vh;
