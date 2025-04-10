@@ -127,8 +127,8 @@ input#search-input:focus-visible {
     document.head.appendChild(style);
 
     // === Load assets ===
-    const logoImgUrl = 'https://yourdomain.com/assets/vivriti-next.svg';
-    const logoWhiteUrl = 'https://yourdomain.com/assets/Vivriti-Next-logo-White.svg';
+    const logoImgUrl = 'https://www.vivriticapital.com/assets/image/logo/fav-icon.png';
+    const logoWhiteUrl = 'https://www.vivriticapital.com/assets/image/logo/vivirti_logo_img.svg';
 
     // === Create chat button ===
     const logo = document.createElement('div');
