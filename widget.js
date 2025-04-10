@@ -22,8 +22,9 @@
     justify-content: flex-end;
     z-index: 9999;
     font-family: sans-serif;
-  }
-  #chat-container {
+}
+
+#chat-container {
     position: fixed;
     bottom: 30px;
     right: 80px;
@@ -36,14 +37,16 @@
     flex-direction: column;
     box-shadow: 0 10px 15px -3px var(--tw-shadow-color, #0000001a), 0 4px 6px -4px var(--tw-shadow-color, #0000001a);
     overflow: hidden;
-  }
-  div#search-box {
+}
+
+div#search-box {
     width: 100%;
     margin: auto;
-    padding: 15px;
+    padding: 15px 15px 15px 15px;
     box-shadow: 0 10px 15px -3px var(--tw-shadow-color, #0000001a), 0 4px 6px -4px var(--tw-shadow-color, #0000001a);
-  }
-  #background-overlay {
+}
+
+#background-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -51,29 +54,38 @@
     width: 100%;
     background: rgba(0, 0, 0, 0.4);
     z-index: 1;
-  }
-  div#response {
+}
+
+div#response {
     background-color: #569ff70f;
     margin-bottom: 0px !important;
-    max-height: 400px;
-    overflow-y: auto;
-    flex: 1;
-    padding: 30px;
-  }
-  .chat-input-bar {
+}
+
+.chat-input-bar {
     padding: 10px;
     border-top: 1px solid #eee;
     background-color: #f9f9f9;
-  }
-  #search-input {
+}
+
+#search-input {
     flex: 1;
     padding: 8px 12px;
     border: 1px solid #ccc;
-    border-radius: 30px;
+    border-radius: 6px;
     font-size: 16px;
     width: 100%;
-  }
-  .exs-header-top {
+    border-radius: 30px;
+}
+
+div#response {
+    max-height: 400px;
+    overflow-y: auto;
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px;
+}
+
+.exs-header-top {
     background-color: #5480cd;
     margin: auto;
     width: 100%;
@@ -81,32 +93,36 @@
     justify-content: center;
     padding: 10px;
     height: 60px;
-  }
-  .exs-header-top img {
+}
+.exs-header-top img{
     width: 150px;
-  }
-  .chat-response .chat-bubble {
+}
+
+.chat-response .chat-bubble {
     background-color: #e0f0ff;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 10px;
     max-width: 80%;
-  }
-  #mic-button {
+}
+
+#mic-button {
     cursor: pointer;
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     font-size: 18px;
     border: 0;
     background-color: transparent;
-  }
-  div#loader {
+}
+
+div#loader {
     text-align: center;
     padding: 20px 0px;
-  }
-  input#search-input:focus-visible {
+}
+
+input#search-input:focus-visible {
     outline: none;
-  }
+}
   `;
     document.head.appendChild(style);
 
