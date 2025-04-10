@@ -138,13 +138,13 @@ input#search-input:focus-visible {
     const wrapper = document.createElement('div');
     wrapper.innerHTML = `
       <div id="bottom-search-logo">
-        <img src="https://yourdomain.com/assets/vivriti-next.svg" width="40" height="40" />
+        <img src="https://www.vivriticapital.com/assets/image/logo/fav-icon.png" width="40" height="40" />
       </div>
       <div id="bottom-search-overlay" style="display: none;">
         <div id="background-overlay"></div>
         <div id="chat-container">
           <div class="exs-header-top">
-            <img src="https://yourdomain.com/assets/Vivriti-Next-logo-White.svg" />
+            <img src="https://www.vivriticapital.com/assets/image/logo/vivirti_logo_img.svg" />
           </div>
           <div id="response" class="chat-response"></div>
           <div id="loader" style="display: none;">Searching...</div>
