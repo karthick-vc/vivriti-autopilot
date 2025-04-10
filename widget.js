@@ -26,7 +26,7 @@
 
 #chat-container {
     position: fixed;
-    bottom: 30px;
+    bottom: 80px;
     right: 80px;
     width: 420px;
     height: 70vh;
