@@ -1,6 +1,6 @@
 (function () {
   const iframe = document.createElement('iframe');
-  iframe.src = '/jarvis.html'; // <-- Replace with your actual hosted URL
+  iframe.src = 'https://karthick-vc.github.io/vivriti-autopilot/jarvis.html'; // <-- Replace with your actual hosted URL
   iframe.style.position = 'fixed';
   iframe.style.bottom = '30px';
   iframe.style.right = '30px';
