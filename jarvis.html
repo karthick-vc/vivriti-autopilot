@@ -5,17 +5,26 @@
     <meta charset="UTF-8">
     <title>Chat SDK</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap"
+        rel="stylesheet">
     <style>
-       body{
-        margin: 0px;
-       }
+        body {
+            margin: 0px;
+
+        }
+        body *{
+            font-family: "Roboto", sans-serif;
+        }
         #chat-container {
             position: fixed;
             bottom: 30px;
             right: 80px;
             width: 100%;
             height: 100%;
-            background: #fff;
+            background: #569ff70f;
             z-index: 9999;
             display: flex;
             border-radius: 20px;
@@ -23,11 +32,11 @@
             box-shadow: 0 10px 15px -3px var(--tw-shadow-color, #0000001a), 0 4px 6px -4px var(--tw-shadow-color, #0000001a);
             overflow: hidden;
         }
-    
+
 
         div#search-box {
             width: 100%;
-            margin: auto;
+            margin: 0px auto;
             padding: 15px 15px 15px 15px;
             box-shadow: 0 10px 15px -3px var(--tw-shadow-color, #0000001a), 0 4px 6px -4px var(--tw-shadow-color, #0000001a);
             padding: 10px;
@@ -47,7 +56,12 @@
         }
 
         div#response {
-            background-color: #569ff70f;
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             margin-bottom: 0px !important;
         }
 
@@ -71,7 +85,7 @@
 
         .exs-header-top {
             background-color: #5480cd;
-            margin: auto;
+            margin: 0px auto;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -113,7 +127,8 @@
 </head>
 
 <body>
-    <div style="width: 100%; height: 100%; display: flex; flex-direction: column;">
+    <div
+        style="width: 100%; height: 98vh; display: flex; flex-direction: column; justify-content: space-between;background: #569ff70f; overflow: hidden;">
         <div class="exs-header-top">
             <img src="https://karthick-vc.github.io/vivriti-autopilot/Vivriti-Next-logo-White.svg"
                 style="max-height:30px;" />
