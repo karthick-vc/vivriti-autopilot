@@ -102,10 +102,11 @@
                 appendMessage(buffer, 'bot');
             }
         }
-
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleSearch(input.value.trim());
-        });
+        if(input){
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleSearch(input.value.trim());
+            });
+        }
 
         const micButton = document.getElementById('mic-button');
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
