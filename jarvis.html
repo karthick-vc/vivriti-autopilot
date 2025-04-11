@@ -46,12 +46,7 @@
 
             if (!isVisible) {
                 // Append chat container to iframe
-                const iframeDoc = jarvisIframe.contentDocument || jarvisIframe.contentWindow.document;
-                const iframeBody = iframeDoc.body;
-
-                if (!iframeBody.contains(chatContainer)) {
-                    iframeBody.appendChild(chatContainer);
-                }
+                jarvisIframe.insertBefore(chatContainer)
             }
 
             chatContainer.style.display = isVisible ? 'none' : 'flex';
