@@ -21,16 +21,32 @@
 
 
     <script>
-        const iframeContainer = document.getElementById('jarvis-widget');
-        let chatDiv = `<div id="chat-container"><div class="exs-header-top"><img src="https://karthick-vc.github.io/vivriti-autopilot/Vivriti-Next-logo-White.svg" /><div class="response-container"> <div id="response" class="chat-response"></div><div id="loader" style="display: none; padding: 10px; font-style: italic;">Jarvis Searching...</div></div><div id="search-box" class="chat-input-bar"> <div><input type="text" id="search-input" placeholder="Type or speak..." style="flex:1;padding:8px;border-radius:20px;border:1px solid #ccc;" /><button id="mic-button" title="Speak your query" style="font-family:"Font Awesome 5 Free";font-weight:900;font-size:18px;background:none;border:none;cursor:pointer;">&#xf130;</button></div></div></div>`;
+        const chatDiv = document.createElement('div');
+        chatDiv.id = 'chat-container';
+        chatDiv.innerHTML = `
+        <div class="exs-header-top">
+            <img src="https://karthick-vc.github.io/vivriti-autopilot/Vivriti-Next-logo-White.svg" />
+            <div class="response-container">
+            <div id="response" class="chat-response"></div>
+            <div id="loader" style="display: none; padding: 10px; font-style: italic;">Jarvis Searching...</div>
+            </div>
+            <div id="search-box" class="chat-input-bar">
+            <div>
+                <input type="text" id="search-input" placeholder="Type or speak..." style="flex:1;padding:8px;border-radius:20px;border:1px solid #ccc;" />
+                <button id="mic-button" title="Speak your query" style="font-family:'Font Awesome 5 Free';font-weight:900;font-size:18px;background:none;border:none;cursor:pointer;">&#xf130;</button>
+            </div>
+            </div>
+        </div>
+        `;
+
+        // Append it to iframeContainer or wherever you want
+        iframeContainer.appendChild(chatDiv);
 
         const chatContainer = document.getElementById('chat-container');
         const toggleButton = document.getElementById('chat-toggle-button');
-
         toggleButton.addEventListener('click', () => {
-            iframeContainer.nextSibling(chatDiv);
-            const isVisible = chatContainer.style.display === 'flex';
-            chatContainer.style.display = isVisible ? 'none' : 'flex';
+            const isVisible = chatDiv.style.display === 'flex';
+            chatDiv.style.display = isVisible ? 'none' : 'flex';
         });
 
         const input = document.getElementById('search-input');
