@@ -2,8 +2,8 @@
   const iframe = document.createElement('iframe');
   iframe.src = 'https://karthick-vc.github.io/vivriti-autopilot/jarvis.html'; // <-- Replace with your actual hosted URL
   iframe.style.position = 'fixed';
-  iframe.style.bottom = '30px';
-  iframe.style.right = '30px';
+  iframe.style.bottom = '0px';
+  iframe.style.right = '0px';
   iframe.style.width = '100%';
   iframe.style.height = '100%';
   iframe.style.border = 'none';
