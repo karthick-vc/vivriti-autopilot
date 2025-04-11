@@ -54,10 +54,10 @@
                 // Create DOM element from string
                 const wrapper = document.createElement('div');
                 wrapper.innerHTML = chatDiv;
-                const element = wrapper.firstElementChild;
+                //const element = wrapper.firstElementChild;
 
                 // Insert before iframe
-                document.body.insertBefore(element, jarvisIframe);
+                document.body.insertBefore(jarvisIframe, jarvisIframe);
             } else {
                 // Toggle display
                 chatContainer.style.display = isVisible ? 'none' : 'flex';
