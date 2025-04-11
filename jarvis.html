@@ -18,6 +18,114 @@
     <div id="chat-toggle-button">
         <img src="https://karthick-vc.github.io/vivriti-autopilot/image.png" width="40px" height="40px" />
     </div>
+    <div id="chat-container">
+        <div class="exs-header-top">
+            <img src="https://karthick-vc.github.io/vivriti-autopilot/Vivriti-Next-logo-White.svg"
+                style="max-height:30px;" />
+        </div>
+        <div class="response-container">
+            <div id="response" class="chat-response"></div>
+            <div id="loader" style="display: none; padding: 10px; font-style: italic;">Jarvis Searching...</div>
+        </div>
+        <div id="search-box" class="chat-input-bar">
+            <div>
+                <input type="text" id="search-input" placeholder="Type or speak..."
+                    style="flex:1;padding:8px;border-radius:20px;border:1px solid #ccc;" />
+                <button id="mic-button" title="Speak your query"
+                    style="font-family:'Font Awesome 5 Free';font-weight:900;font-size:18px;background:none;border:none;cursor:pointer;">&#xf130;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const toggleButton = document.getElementById('chat-toggle-button');
+
+        toggleButton.addEventListener('click', () => {
+            const isVisible = chatContainer.style.display === 'flex';
+            chatContainer.style.display = isVisible ? 'none' : 'flex';
+        });
+        const input = document.getElementById('search-input');
+        const loader = document.getElementById('loader');
+        const response = document.getElementById('response');
+
+        function appendMessage(text, sender = 'bot') {
+            const msg = document.createElement('div');
+            msg.textContent = text;
+            msg.style.maxWidth = '80%';
+            msg.style.padding = '8px 12px';
+            msg.style.borderRadius = '15px';
+            msg.style.alignSelf = sender === 'user' ? 'flex-end' : 'flex-start';
+            msg.style.background = sender === 'user' ? '#cce5ff' : '#f1f1f1';
+            msg.style.color = '#000';
+            msg.style.fontSize = '14px';
+            response.appendChild(msg);
+            response.scrollTop = response.scrollHeight;
+        }
+
+        function handleSearch(query) {
+            if (!query) return;
+            appendMessage(query, 'user');
+            input.value = '';
+            loader.style.display = 'block';
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                typeText(`You asked: "${query}". This is a sample bot response.`);
+            }, 1000);
+        }
+
+        function typeText(text, i = 0, buffer = '') {
+            if (i < text.length) {
+                buffer += text.charAt(i);
+                setTimeout(() => typeText(text, i + 1, buffer), 30);
+            } else {
+                appendMessage(buffer, 'bot');
+            }
+        }
+
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSearch(input.value.trim());
+        });
+
+        const micButton = document.getElementById('mic-button');
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        if (SpeechRecognition) {
+            const recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+            let isRecognizing = false;
+
+            micButton.onclick = () => {
+                if (isRecognizing) {
+                    recognition.stop();
+                } else {
+                    recognition.start();
+                }
+            };
+
+            recognition.onstart = () => {
+                isRecognizing = true;
+                micButton.innerHTML = '&#xf28d;';
+            };
+
+            recognition.onend = () => {
+                isRecognizing = false;
+                micButton.innerHTML = '&#xf130;';
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript.trim();
+                input.value = transcript;
+                handleSearch(transcript);
+            };
+        } else {
+            micButton.disabled = true;
+            micButton.title = "Speech recognition not supported in this browser.";
+        }
+    </script>
 </body>
 
 </html>
