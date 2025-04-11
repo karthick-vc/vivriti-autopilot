@@ -49,7 +49,7 @@
         const toggleButton = document.getElementById('chat-toggle-button');
 
         function toggleChat() {
-            iframeContainer.appendChild(chatContainer);
+            iframeContainer.nextSibling(chatContainer);
             const isVisible = chatContainer.style.display === 'flex';
             chatContainer.style.display = isVisible ? 'none' : 'flex';
         }
