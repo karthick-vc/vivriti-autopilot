@@ -12,6 +12,5 @@
   // iframe.style.boxShadow = '0 8px 20px rgba(0,0,0,0.25)';
   iframe.style.zIndex = '10000';
   iframe.allow = 'microphone';
-
   document.body.appendChild(iframe);
 })();

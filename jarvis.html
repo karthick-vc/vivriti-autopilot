@@ -45,8 +45,10 @@
             const isVisible = chatContainer.style.display === 'flex';
 
             if (!isVisible) {
-                // Append chat container to iframe
-                jarvisIframe.insertBefore(chatContainer)
+                // Make sure it's right before the iframe
+                if (jarvisIframe && chatContainer.nextSibling !== jarvisIframe) {
+                    document.body.insertBefore(chatContainer, jarvisIframe);
+                }
             }
 
             chatContainer.style.display = isVisible ? 'none' : 'flex';
