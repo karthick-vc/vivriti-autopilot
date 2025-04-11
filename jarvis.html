@@ -18,41 +18,52 @@
     <div id="chat-toggle-button">
         <img src="https://karthick-vc.github.io/vivriti-autopilot/image.png" width="40px" height="40px" />
     </div>
-    <div id="chat-container">
-        <div class="exs-header-top">
-            <img src="https://karthick-vc.github.io/vivriti-autopilot/Vivriti-Next-logo-White.svg"
-                style="max-height:30px;" />
-        </div>
-        <div class="response-container">
-            <div id="response" class="chat-response"></div>
-            <div id="loader" style="display: none; padding: 10px; font-style: italic;">Jarvis Searching...</div>
-        </div>
-        <div id="search-box" class="chat-input-bar">
-            <div>
-                <input type="text" id="search-input" placeholder="Type or speak..."
-                    style="flex:1;padding:8px;border-radius:20px;border:1px solid #ccc;" />
-                <button id="mic-button" title="Speak your query"
-                    style="font-family:'Font Awesome 5 Free';font-weight:900;font-size:18px;background:none;border:none;cursor:pointer;">&#xf130;</button>
-            </div>
-        </div>
-    </div>
+
 
     <script>
+
         const chatContainer = document.getElementById('chat-container');
         const toggleButton = document.getElementById('chat-toggle-button');
         const jarvisIframe = document.getElementById('jarvis-widget');
+
+        let chatDiv = `
+    <div id="chat-container" style="display:flex; position:fixed; bottom:130px; right:20px; width:300px; background:white; padding:10px; box-shadow:0 4px 12px rgba(0,0,0,0.15); border-radius:10px; z-index:10000;">
+      <div class="exs-header-top">
+        <img src="https://karthick-vc.github.io/vivriti-autopilot/Vivriti-Next-logo-White.svg" style="max-height:30px;" />
+      </div>
+      <div class="response-container">
+        <div id="response" class="chat-response"></div>
+        <div id="loader" style="display: none; padding: 10px; font-style: italic;">Jarvis Searching...</div>
+      </div>
+      <div id="search-box" class="chat-input-bar">
+        <div>
+          <input type="text" id="search-input" placeholder="Type or speak..."
+            style="flex:1;padding:8px;border-radius:20px;border:1px solid #ccc;" />
+          <button id="mic-button" title="Speak your query"
+            style="font-family:'Font Awesome 5 Free';font-weight:900;font-size:18px;background:none;border:none;cursor:pointer;">&#xf130;</button>
+        </div>
+      </div>
+    </div>
+  `;
+
         toggleButton.addEventListener('click', () => {
-            const isVisible = chatContainer.style.display === 'flex';
+            chatContainer = document.getElementById('chat-container');
+            const isVisible = chatContainer && chatContainer.style.display === 'flex';
 
-            if (!isVisible) {
-                // Make sure it's right before the iframe
-                if (jarvisIframe && chatContainer.nextSibling !== jarvisIframe) {
-                    document.body.insertBefore(chatContainer, jarvisIframe);
-                }
+            if (!chatContainer) {
+                // Create DOM element from string
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = chatDiv;
+                const element = wrapper.firstElementChild;
+
+                // Insert before iframe
+                document.body.insertBefore(element, jarvisIframe);
+            } else {
+                // Toggle display
+                chatContainer.style.display = isVisible ? 'none' : 'flex';
             }
-
-            chatContainer.style.display = isVisible ? 'none' : 'flex';
         });
+
         const input = document.getElementById('search-input');
         const loader = document.getElementById('loader');
         const response = document.getElementById('response');
