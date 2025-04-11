@@ -15,7 +15,7 @@
 
 <body>
     <!-- Floating Chat Icon -->
-    <div id="chat-toggle-button">
+    <div id="chat-toggle-button" onclick="toggleChat()">
         <img src="https://karthick-vc.github.io/vivriti-autopilot/image.png" width="40px" height="40px" />
     </div>
 
@@ -47,10 +47,15 @@
 
         const chatContainer = document.getElementById('chat-container');
         const toggleButton = document.getElementById('chat-toggle-button');
-        toggleButton.addEventListener('click', () => {
-            const isVisible = chatDiv.style.display === 'flex';
-            chatDiv.style.display = isVisible ? 'none' : 'flex';
-        });
+
+        function toggleChat() {
+            const isVisible = chatContainer.style.display === 'flex';
+            chatContainer.style.display = isVisible ? 'none' : 'flex';
+        }
+        // toggleButton.addEventListener('click', () => {
+        //     const isVisible = chatDiv.style.display === 'flex';
+        //     chatDiv.style.display = isVisible ? 'none' : 'flex';
+        // });
 
         const input = document.getElementById('search-input');
         const loader = document.getElementById('loader');
