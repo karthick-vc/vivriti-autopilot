@@ -40,9 +40,20 @@
     <script>
         const chatContainer = document.getElementById('chat-container');
         const toggleButton = document.getElementById('chat-toggle-button');
-
+        const jarvisIframe = document.getElementById('jarvis-widget');
         toggleButton.addEventListener('click', () => {
             const isVisible = chatContainer.style.display === 'flex';
+
+            if (!isVisible) {
+                // Append chat container to iframe
+                const iframeDoc = jarvisIframe.contentDocument || jarvisIframe.contentWindow.document;
+                const iframeBody = iframeDoc.body;
+
+                if (!iframeBody.contains(chatContainer)) {
+                    iframeBody.appendChild(chatContainer);
+                }
+            }
+
             chatContainer.style.display = isVisible ? 'none' : 'flex';
         });
         const input = document.getElementById('search-input');
