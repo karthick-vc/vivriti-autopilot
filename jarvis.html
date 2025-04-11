@@ -6,25 +6,15 @@
     <title>Chat SDK</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <style>
-        /* #bottom-search-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    z-index: 9999;
-    font-family: sans-serif;
-} */
-
+       body{
+        margin: 0px;
+       }
         #chat-container {
             position: fixed;
             bottom: 30px;
             right: 80px;
-            width: 420px;
-            height: 70vh;
+            width: 100%;
+            height: 100%;
             background: #fff;
             z-index: 9999;
             display: flex;
@@ -33,12 +23,17 @@
             box-shadow: 0 10px 15px -3px var(--tw-shadow-color, #0000001a), 0 4px 6px -4px var(--tw-shadow-color, #0000001a);
             overflow: hidden;
         }
+    
 
         div#search-box {
             width: 100%;
             margin: auto;
             padding: 15px 15px 15px 15px;
             box-shadow: 0 10px 15px -3px var(--tw-shadow-color, #0000001a), 0 4px 6px -4px var(--tw-shadow-color, #0000001a);
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            border-top: 1px solid #ddd;
         }
 
         #background-overlay {
@@ -54,12 +49,6 @@
         div#response {
             background-color: #569ff70f;
             margin-bottom: 0px !important;
-        }
-
-        .chat-input-bar {
-            padding: 10px;
-            border-top: 1px solid #eee;
-            background-color: #f9f9f9;
         }
 
         #search-input {
@@ -129,8 +118,10 @@
             <img src="https://karthick-vc.github.io/vivriti-autopilot/Vivriti-Next-logo-White.svg"
                 style="max-height:30px;" />
         </div>
-        <div id="response" class="chat-response"></div>
-        <div id="loader" style="display: none; padding: 10px; font-style: italic;">Jarvis Searching...</div>
+        <div>
+            <div id="response" class="chat-response"></div>
+            <div id="loader" style="display: none; padding: 10px; font-style: italic;">Jarvis Searching...</div>
+        </div>
         <div id="search-box" class="chat-input-bar">
             <input type="text" id="search-input" placeholder="Type or speak..."
                 style="flex:1;padding:8px;border-radius:20px;border:1px solid #ccc;" />
