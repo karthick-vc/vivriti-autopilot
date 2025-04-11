@@ -41,15 +41,16 @@
             overflow: hidden;
         }
 
+        div#search-box>div {
+            display: flex;
+            gap: 8px;
+            padding: 18px 12px;
+        }
 
         div#search-box {
             width: 100%;
             margin: 0px auto;
-            padding: 15px 15px 15px 15px;
             box-shadow: 0 10px 15px -3px var(--tw-shadow-color, #0000001a), 0 4px 6px -4px var(--tw-shadow-color, #0000001a);
-            padding: 10px;
-            display: flex;
-            gap: 8px;
             border-top: 1px solid #ddd;
         }
 
@@ -92,13 +93,12 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            padding: 10px;
-            height: 60px;
             align-items: center;
         }
 
         .exs-header-top img {
             width: 150px;
+            margin: 30px;
         }
 
         .chat-response .chat-bubble {
@@ -158,10 +158,12 @@
             <div id="loader" style="display: none; padding: 10px; font-style: italic;">Jarvis Searching...</div>
         </div>
         <div id="search-box" class="chat-input-bar">
-            <input type="text" id="search-input" placeholder="Type or speak..."
-                style="flex:1;padding:8px;border-radius:20px;border:1px solid #ccc;" />
-            <button id="mic-button" title="Speak your query"
-                style="font-family:'Font Awesome 5 Free';font-weight:900;font-size:18px;background:none;border:none;cursor:pointer;">&#xf130;</button>
+            <div>
+                <input type="text" id="search-input" placeholder="Type or speak..."
+                    style="flex:1;padding:8px;border-radius:20px;border:1px solid #ccc;" />
+                <button id="mic-button" title="Speak your query"
+                    style="font-family:'Font Awesome 5 Free';font-weight:900;font-size:18px;background:none;border:none;cursor:pointer;">&#xf130;</button>
+            </div>
         </div>
     </div>
 
