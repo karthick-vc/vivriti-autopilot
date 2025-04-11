@@ -47,7 +47,7 @@
   `;
 
         toggleButton.addEventListener('click', () => {
-            chatContainer = document.getElementById('chat-container');
+            const chatContainer = document.getElementById('chat-container');
             const isVisible = chatContainer && chatContainer.style.display === 'flex';
 
             if (!chatContainer) {
