@@ -18,33 +18,21 @@
     <div id="chat-toggle-button">
         <img src="https://karthick-vc.github.io/vivriti-autopilot/image.png" width="40px" height="40px" />
     </div>
-    <div id="chat-container">
-        <div class="exs-header-top">
-            <img src="https://karthick-vc.github.io/vivriti-autopilot/Vivriti-Next-logo-White.svg"
-                style="max-height:30px;" />
-        </div>
-        <div class="response-container">
-            <div id="response" class="chat-response"></div>
-            <div id="loader" style="display: none; padding: 10px; font-style: italic;">Jarvis Searching...</div>
-        </div>
-        <div id="search-box" class="chat-input-bar">
-            <div>
-                <input type="text" id="search-input" placeholder="Type or speak..."
-                    style="flex:1;padding:8px;border-radius:20px;border:1px solid #ccc;" />
-                <button id="mic-button" title="Speak your query"
-                    style="font-family:'Font Awesome 5 Free';font-weight:900;font-size:18px;background:none;border:none;cursor:pointer;">&#xf130;</button>
-            </div>
-        </div>
-    </div>
+
 
     <script>
+        const iframeContainer = document.getElementById('jarvis-widget');
+        let chatDiv = `<div id="chat-container"><div class="exs-header-top"><img src="https://karthick-vc.github.io/vivriti-autopilot/Vivriti-Next-logo-White.svg" /><div class="response-container"> <div id="response" class="chat-response"></div><div id="loader" style="display: none; padding: 10px; font-style: italic;">Jarvis Searching...</div></div><div id="search-box" class="chat-input-bar"> <div><input type="text" id="search-input" placeholder="Type or speak..." style="flex:1;padding:8px;border-radius:20px;border:1px solid #ccc;" /><button id="mic-button" title="Speak your query" style="font-family:"Font Awesome 5 Free";font-weight:900;font-size:18px;background:none;border:none;cursor:pointer;">&#xf130;</button></div></div></div>`;
+
         const chatContainer = document.getElementById('chat-container');
         const toggleButton = document.getElementById('chat-toggle-button');
 
         toggleButton.addEventListener('click', () => {
+            iframeContainer.nextSibling(chatDiv);
             const isVisible = chatContainer.style.display === 'flex';
             chatContainer.style.display = isVisible ? 'none' : 'flex';
         });
+
         const input = document.getElementById('search-input');
         const loader = document.getElementById('loader');
         const response = document.getElementById('response');
@@ -84,9 +72,11 @@
             }
         }
 
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleSearch(input.value.trim());
-        });
+        if (input) {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleSearch(input.value.trim());
+            });
+        }
 
         const micButton = document.getElementById('mic-button');
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -98,13 +88,15 @@
             recognition.lang = 'en-US';
             let isRecognizing = false;
 
-            micButton.onclick = () => {
-                if (isRecognizing) {
-                    recognition.stop();
-                } else {
-                    recognition.start();
-                }
-            };
+            if (micButton) {
+                micButton.onclick = () => {
+                    if (isRecognizing) {
+                        recognition.stop();
+                    } else {
+                        recognition.start();
+                    }
+                };
+            }
 
             recognition.onstart = () => {
                 isRecognizing = true;
