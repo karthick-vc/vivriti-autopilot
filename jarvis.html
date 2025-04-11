@@ -41,7 +41,9 @@
         `;
 
         // Append it to iframeContainer or wherever you want
-        iframeContainer.appendChild(chatDiv);
+        if (iframeContainer) {
+            iframeContainer.appendChild(chatDiv);
+        }
 
         const chatContainer = document.getElementById('chat-container');
         const toggleButton = document.getElementById('chat-toggle-button');
