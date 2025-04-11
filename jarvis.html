@@ -102,7 +102,7 @@
                 appendMessage(buffer, 'bot');
             }
         }
-        if(input){
+        if (input) {
             input.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') handleSearch(input.value.trim());
             });
@@ -118,13 +118,15 @@
             recognition.lang = 'en-US';
             let isRecognizing = false;
 
-            micButton.onclick = () => {
-                if (isRecognizing) {
-                    recognition.stop();
-                } else {
-                    recognition.start();
-                }
-            };
+            if (micButton) {
+                micButton.onclick = () => {
+                    if (isRecognizing) {
+                        recognition.stop();
+                    } else {
+                        recognition.start();
+                    }
+                };
+            }
 
             recognition.onstart = () => {
                 isRecognizing = true;
