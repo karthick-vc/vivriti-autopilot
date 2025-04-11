@@ -1,4 +1,6 @@
 (function () {
+  const jarvisDiv = document.createElement('div');
+  jarvisDiv.id = 'jarvis-widget';
   const iframe = document.createElement('iframe');
   iframe.src = 'https://karthick-vc.github.io/vivriti-autopilot/jarvis.html'; // <-- Replace with your actual hosted URL
   iframe.style.position = 'fixed';
@@ -12,5 +14,5 @@
   iframe.style.zIndex = '10000';
   iframe.allow = 'microphone';
 
-  document.body.appendChild(iframe);
+  jarvisDiv.appendChild(iframe);
 })();
