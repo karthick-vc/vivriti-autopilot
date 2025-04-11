@@ -28,13 +28,16 @@ body * {
     position: fixed;
     bottom: 30px;
     right: 100px;
-    width: 450px !important;
-    height: 500px;
     z-index: 9999;
     display: flex;
     border-radius: 20px;
     flex-direction: column;
-    box-shadow: 0 10px 15px -3px var(--tw-shadow-color, #0000001a), 0 4px 6px -4px var(--tw-shadow-color, #0000001a);
+    width: 320px;
+    height: 450px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 20px;
+    z-index: 10000;
     overflow: hidden;
     display: none;
     flex-direction: column;
@@ -76,13 +79,15 @@ div#search-box {
     border-radius: 30px;
 }
 
-div#response {
+.response-container{
     max-height: 400px;
-    min-height: 275px;
+    height: 286px;
     overflow-y: auto;
+}
+
+div#response {
     flex: 1;
-    overflow-y: auto;
-    padding: 30px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 8px;
