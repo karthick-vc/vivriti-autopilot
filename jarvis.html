@@ -15,21 +15,29 @@
             margin: 0px;
 
         }
-        body *{
+
+        body * {
             font-family: "Roboto", sans-serif;
         }
+
         #chat-container {
             position: fixed;
-            bottom: 30px;
-            right: 80px;
-            width: 100%;
-            height: 100%;
+            position: fixed;
+            bottom: 100px;
+            right: 45px;
+            width: 450px !important;
+            min-height: 550px;
             background: #569ff70f;
             z-index: 9999;
             display: flex;
             border-radius: 20px;
             flex-direction: column;
             box-shadow: 0 10px 15px -3px var(--tw-shadow-color, #0000001a), 0 4px 6px -4px var(--tw-shadow-color, #0000001a);
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #569ff70f;
             overflow: hidden;
         }
 
@@ -55,16 +63,6 @@
             z-index: 1;
         }
 
-        div#response {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-bottom: 0px !important;
-        }
-
         #search-input {
             flex: 1;
             padding: 8px 12px;
@@ -77,10 +75,15 @@
 
         div#response {
             max-height: 400px;
+            min-height: 350px;
             overflow-y: auto;
             flex: 1;
             overflow-y: auto;
             padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 0px !important;
         }
 
         .exs-header-top {
@@ -127,8 +130,25 @@
 </head>
 
 <body>
-    <div
-        style="width: 100%; height: 98vh; display: flex; flex-direction: column; justify-content: space-between;background: #569ff70f; overflow: hidden;">
+    <!-- Floating Chat Icon -->
+    <div id="chat-toggle-button" style="
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #5480cd;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10000;
+    ">
+        <i class="fas fa-comment-alt" style="color: white; font-size: 24px;"></i>
+    </div>
+    <div id="chat-container">
         <div class="exs-header-top">
             <img src="https://karthick-vc.github.io/vivriti-autopilot/Vivriti-Next-logo-White.svg"
                 style="max-height:30px;" />
@@ -146,6 +166,13 @@
     </div>
 
     <script>
+        const chatContainer = document.getElementById('chat-container');
+        const toggleButton = document.getElementById('chat-toggle-button');
+
+        toggleButton.addEventListener('click', () => {
+            const isVisible = chatContainer.style.display === 'flex';
+            chatContainer.style.display = isVisible ? 'none' : 'flex';
+        });
         const input = document.getElementById('search-input');
         const loader = document.getElementById('loader');
         const response = document.getElementById('response');

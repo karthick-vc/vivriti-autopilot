@@ -4,8 +4,8 @@
   iframe.style.position = 'fixed';
   iframe.style.bottom = '30px';
   iframe.style.right = '30px';
-  iframe.style.width = '320px';
-  iframe.style.height = '450px';
+  iframe.style.width = '100%';
+  iframe.style.height = '100%';
   iframe.style.border = 'none';
   iframe.style.borderRadius = '16px';
   iframe.style.boxShadow = '0 8px 20px rgba(0,0,0,0.25)';
