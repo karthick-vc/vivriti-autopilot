@@ -1,6 +1,6 @@
 (function () {
   const iframe = document.createElement('iframe');
-  iframe.src = 'https://yourdomain.com/jarvis.html'; // <-- Replace with your actual hosted URL
+  iframe.src = '/jarvis.html'; // <-- Replace with your actual hosted URL
   iframe.style.position = 'fixed';
   iframe.style.bottom = '30px';
   iframe.style.right = '30px';
